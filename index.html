@@ -696,9 +696,12 @@
     width: 44px; height: 44px;
     font-size: 20px;
     cursor: pointer;
-    z-index: 100;
+    z-index: 300;
     display: flex; align-items: center; justify-content: center;
     transition: all 0.2s;
+  }
+  @media(max-width: 768px) {
+    .admin-btn { bottom: 80px; }
   }
   .admin-btn:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -1226,6 +1229,7 @@ function updateQty(code, delta) {
 
 function renderCart() {
   const cartEl = document.getElementById('cart-items');
+  if (!cartEl) return;
   const codes = Object.keys(cart);
   if (codes.length === 0) {
     cartEl.innerHTML = '<div class="cart-empty">No items added yet</div>';
@@ -1235,11 +1239,16 @@ function renderCart() {
     updateMinNotice(0);
     document.getElementById('checkout-btn').disabled = true;
     // mobile bars
-    document.getElementById('mob-top-items').textContent = 'No items yet';
-    document.getElementById('mob-top-total').textContent = '$0';
-    document.getElementById('mob-bot-items').textContent = 'No items added';
-    document.getElementById('mob-bot-total').textContent = '$0';
-    document.getElementById('mob-bot-btn').disabled = true;
+    const mobTopItems = document.getElementById('mob-top-items');
+    const mobTopTotal = document.getElementById('mob-top-total');
+    const mobBotItems = document.getElementById('mob-bot-items');
+    const mobBotTotal = document.getElementById('mob-bot-total');
+    const mobBotBtn = document.getElementById('mob-bot-btn');
+    if (mobTopItems) mobTopItems.textContent = 'No items yet';
+    if (mobTopTotal) mobTopTotal.textContent = '$0';
+    if (mobBotItems) mobBotItems.textContent = 'No items added';
+    if (mobBotTotal) mobBotTotal.textContent = '$0';
+    if (mobBotBtn) mobBotBtn.disabled = true;
     return;
   }
 
@@ -1269,12 +1278,17 @@ function renderCart() {
   document.getElementById('checkout-btn').disabled = vialCount < 5;
 
   // mobile bars
+  const mobTopItems = document.getElementById('mob-top-items');
+  const mobTopTotal = document.getElementById('mob-top-total');
+  const mobBotItems = document.getElementById('mob-bot-items');
+  const mobBotTotal = document.getElementById('mob-bot-total');
+  const mobBotBtn2 = document.getElementById('mob-bot-btn');
   const itemLabel = totalCount === 1 ? '1 item' : `${totalCount} items`;
-  document.getElementById('mob-top-items').textContent = vialCount >= 5 ? `✅ ${itemLabel} — Min met` : `${itemLabel} — Need ${5 - vialCount} more vial${5 - vialCount === 1 ? '' : 's'}`;
-  document.getElementById('mob-top-total').textContent = '$' + subtotal;
-  document.getElementById('mob-bot-items').textContent = vialCount >= 5 ? `✅ Minimum met` : `Need ${5 - vialCount} more vial${5 - vialCount === 1 ? '' : 's'}`;
-  document.getElementById('mob-bot-total').textContent = '$' + subtotal;
-  document.getElementById('mob-bot-btn').disabled = vialCount < 5;
+  if (mobTopItems) mobTopItems.textContent = vialCount >= 5 ? `✅ ${itemLabel} — Min met` : `${itemLabel} — Need ${5 - vialCount} more vial${5 - vialCount === 1 ? '' : 's'}`;
+  if (mobTopTotal) mobTopTotal.textContent = '$' + subtotal;
+  if (mobBotItems) mobBotItems.textContent = vialCount >= 5 ? `✅ Minimum met` : `Need ${5 - vialCount} more vial${5 - vialCount === 1 ? '' : 's'}`;
+  if (mobBotTotal) mobBotTotal.textContent = '$' + subtotal;
+  if (mobBotBtn2) mobBotBtn2.disabled = vialCount < 5;
 }
 
 function updateMinNotice(vialCount) {
