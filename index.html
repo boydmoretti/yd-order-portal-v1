@@ -1008,8 +1008,13 @@
       <div class="success-box">
         <div class="success-icon">✅</div>
         <div class="success-title">ORDER RECEIVED</div>
-        <div class="success-msg">Your order has been submitted.<br>Send your crypto payment to the wallet address.<br>Then screenshot your transaction and send it to Boyd on WhatsApp.<br>Boyd will confirm receipt before your order is processed.<br><br><strong>Avg shipping time: 4 weeks.</strong><br>Free reship if seized at customs (1x).</div>
-        <button class="submit-btn" style="margin-top:20px;" onclick="closeCheckout()">CLOSE</button>
+        <div class="success-msg">Your order has been submitted.<br>Send your crypto payment to the wallet address below.<br>Screenshot your transaction and send it to Boyd on WhatsApp.<br>Boyd will confirm receipt before your order is processed.<br><br><strong>Avg shipping time: 4 weeks.</strong><br>Free reship if seized at customs (1x).</div>
+        <div style="background:#1a1a2e;border:1px solid var(--accent);border-radius:8px;padding:14px;margin-top:16px;text-align:center;">
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;letter-spacing:1px;">SEND PAYMENT TO</div>
+          <div style="font-size:12px;color:var(--accent);word-break:break-all;margin-bottom:10px;font-family:monospace;">0x85A165217426c4262BCb6812D6936BbE305F937B</div>
+          <button class="submit-btn" style="width:100%;margin-bottom:10px;" onclick="navigator.clipboard.writeText('0x85A165217426c4262BCb6812D6936BbE305F937B').then(()=>alert('Wallet address copied!'))">📋 COPY WALLET ADDRESS</button>
+        </div>
+        <button class="submit-btn" style="margin-top:14px;background:var(--surface2);color:var(--text);" onclick="closeCheckout()">CLOSE</button>
       </div>
     </div>
   </div>
@@ -1344,6 +1349,18 @@ function openCheckout() {
 
 function closeCheckout() {
   document.getElementById('checkout-modal').classList.remove('active');
+  // Reset form fields
+  document.getElementById('order-name').value = '';
+  document.getElementById('order-phone').value = '';
+  document.getElementById('order-email').value = '';
+  document.getElementById('order-connection').value = '';
+  // Reset submit button
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = false;
+  btn.textContent = 'SUBMIT ORDER';
+  // Reset success/checkout screens
+  document.getElementById('checkout-content').style.display = '';
+  document.getElementById('success-content').style.display = 'none';
 }
 
 async function submitOrder() {
