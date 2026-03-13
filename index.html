@@ -764,7 +764,7 @@
 
     <!-- PER VIAL NOTICE -->
     <div style="background:var(--surface2);border:1px solid var(--accent);border-radius:8px;padding:10px 14px;margin-bottom:14px;text-align:center;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:0.5px;">
-      💊 Prices are per vial &nbsp;•&nbsp; Minimum order: 10 vials (any mix) &nbsp;•&nbsp; Shipping must be added to every order
+      💊 Prices are per vial &nbsp;•&nbsp; Minimum order: 5 vials (any mix) &nbsp;•&nbsp; Shipping must be added to every order
     </div>
 
     <!-- SHIPPING FIRST -->
@@ -773,7 +773,7 @@
       <div class="prod-code">SHIP</div>
       <div class="prod-info">
         <div class="prod-name">🚚 USPS SHIPPING — CHINA TO USA</div>
-        <div class="prod-detail">Every order must include shipping • 4 week delivery • Free reship if seized (1x) • Does NOT count toward 10 vial minimum</div>
+        <div class="prod-detail">Every order must include shipping • 4 week delivery • Free reship if seized (1x) • Does NOT count toward 5 vial minimum</div>
       </div>
       <div class="prod-price">$75</div>
       <div class="qty-control">
@@ -842,7 +842,7 @@
       <span id="cart-total">$0</span>
     </div>
     <div class="min-order-notice unmet" id="min-notice">
-      Minimum order: 10 vials (not counting shipping)
+      Minimum order: 5 vials (not counting shipping)
     </div>
     <button class="checkout-btn" id="checkout-btn" disabled onclick="openCheckout()">CHECKOUT</button>
     <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
@@ -1163,7 +1163,7 @@ function renderCart() {
   document.getElementById('cart-subtotal').textContent = '$' + subtotal;
   document.getElementById('cart-total').textContent = '$' + subtotal;
   updateMinNotice(vialCount);
-  document.getElementById('checkout-btn').disabled = vialCount < 10;
+  document.getElementById('checkout-btn').disabled = vialCount < 5;
 }
 
 function updateMinNotice(vialCount) {
@@ -1172,7 +1172,7 @@ function updateMinNotice(vialCount) {
     el.textContent = `✅ ${vialCount} vials — Minimum met`;
     el.className = 'min-order-notice met';
   } else {
-    el.textContent = `Minimum: 10 vials — You have ${vialCount} (shipping doesn't count)`;
+    el.textContent = `Minimum: 5 vials — You have ${vialCount} (shipping doesn't count)`;
     el.className = 'min-order-notice unmet';
   }
 }
