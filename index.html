@@ -303,7 +303,98 @@
   }
   @media(max-width: 768px) {
     .main-layout { flex-direction: column; }
-    .cart-panel { width: 100%; height: auto; position: static; border-left: none; border-top: 2px solid var(--border); }
+    .cart-panel { display: none; }
+    body { padding-bottom: 70px; }
+  }
+  @media(min-width: 769px) {
+    .mobile-cart-top, .mobile-cart-bottom { display: none !important; }
+  }
+
+  /* MOBILE STICKY TOP BAR */
+  .mobile-cart-top {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--surface);
+    border-bottom: 2px solid var(--accent);
+    padding: 8px 14px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  @media(max-width: 768px) {
+    .mobile-cart-top { display: flex; }
+  }
+  .mobile-cart-top .mct-left {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--accent);
+  }
+  .mobile-cart-top .mct-mid {
+    font-size: 13px;
+    color: var(--text-muted);
+    flex: 1;
+    text-align: center;
+  }
+  .mobile-cart-top .mct-right {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  /* MOBILE STICKY BOTTOM BAR */
+  .mobile-cart-bottom {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: var(--surface);
+    border-top: 2px solid var(--accent);
+    padding: 10px 16px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  @media(max-width: 768px) {
+    .mobile-cart-bottom { display: flex; }
+  }
+  .mobile-cart-bottom .mcb-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .mobile-cart-bottom .mcb-items {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .mobile-cart-bottom .mcb-total {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .mobile-cart-bottom .mcb-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .mobile-cart-bottom .mcb-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 
   .cart-title {
@@ -756,6 +847,13 @@
 <!-- CLOSED BANNER -->
 <div id="closed-banner">⛔ ORDERS ARE CURRENTLY CLOSED ⛔</div>
 
+<!-- MOBILE STICKY TOP CART BAR -->
+<div class="mobile-cart-top">
+  <div class="mct-left">🛒 CART</div>
+  <div class="mct-mid" id="mob-top-items">No items yet</div>
+  <div class="mct-right" id="mob-top-total">$0</div>
+</div>
+
 <!-- MAIN LAYOUT -->
 <div class="main-layout">
 
@@ -1131,6 +1229,12 @@ function renderCart() {
     document.getElementById('cart-total').textContent = '$0';
     updateMinNotice(0);
     document.getElementById('checkout-btn').disabled = true;
+    // mobile bars
+    document.getElementById('mob-top-items').textContent = 'No items yet';
+    document.getElementById('mob-top-total').textContent = '$0';
+    document.getElementById('mob-bot-items').textContent = 'No items added';
+    document.getElementById('mob-bot-total').textContent = '$0';
+    document.getElementById('mob-bot-btn').disabled = true;
     return;
   }
 
@@ -1158,11 +1262,19 @@ function renderCart() {
   document.getElementById('cart-total').textContent = '$' + subtotal;
   updateMinNotice(vialCount);
   document.getElementById('checkout-btn').disabled = vialCount < 5;
+
+  // mobile bars
+  const itemLabel = totalCount === 1 ? '1 item' : `${totalCount} items`;
+  document.getElementById('mob-top-items').textContent = vialCount >= 5 ? `✅ ${itemLabel} — Min met` : `${itemLabel} — Need ${5 - vialCount} more vial${5 - vialCount === 1 ? '' : 's'}`;
+  document.getElementById('mob-top-total').textContent = '$' + subtotal;
+  document.getElementById('mob-bot-items').textContent = vialCount >= 5 ? `✅ Minimum met` : `Need ${5 - vialCount} more vial${5 - vialCount === 1 ? '' : 's'}`;
+  document.getElementById('mob-bot-total').textContent = '$' + subtotal;
+  document.getElementById('mob-bot-btn').disabled = vialCount < 5;
 }
 
 function updateMinNotice(vialCount) {
   const el = document.getElementById('min-notice');
-  if (vialCount >= 10) {
+  if (vialCount >= 5) {
     el.textContent = `✅ ${vialCount} vials — Minimum met`;
     el.className = 'min-order-notice met';
   } else {
@@ -1432,5 +1544,14 @@ async function checkPortalStatus() {
 checkPortalStatus();
 renderCart();
 </script>
+<!-- MOBILE STICKY BOTTOM CART BAR -->
+<div class="mobile-cart-bottom">
+  <div class="mcb-info">
+    <div class="mcb-items" id="mob-bot-items">No items added</div>
+    <div class="mcb-total" id="mob-bot-total">$0</div>
+  </div>
+  <button class="mcb-btn" id="mob-bot-btn" onclick="openCheckout()" disabled>CHECKOUT</button>
+</div>
+
 </body>
 </html>
