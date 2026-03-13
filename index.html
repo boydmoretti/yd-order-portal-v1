@@ -1172,7 +1172,7 @@ function updateMinNotice(vialCount) {
     el.textContent = `✅ ${vialCount} vials — Minimum met`;
     el.className = 'min-order-notice met';
   } else {
-    el.textContent = `Minimum: 5 vials — You have ${vialCount} (shipping doesn't count)`;
+    el.textContent = `Minimum: 5 vials — You have ${vialCount}`;
     el.className = 'min-order-notice unmet';
   }
 }
