@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YD Price Sheet 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3350;
+    --text: #e8eaf0;
+    --text-muted: #7b82a0;
+    --accent: #c8a84b;
+    --accent-glow: rgba(200,168,75,0.15);
+    --shipping-bg: #ff4d1a;
+    --shipping-text: #ffffff;
+    --test-bg: #1a3a5c;
+    --test-border: #2d6ca8;
+    --test-text: #7ec8f5;
+    --primo-bg: #3a2e0a;
+    --primo-border: #c8a84b;
+    --primo-text: #f5d87e;
+    --oos-bg: #2a1a1a;
+    --oos-text: #ff6b6b;
+    --tablet-bg: #1a2a1a;
+    --tablet-border: #3a6a3a;
+    --green: #4caf50;
+    --red: #f44336;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0a0c14 0%, #1a1d27 50%, #0a0c14 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+  }
+  .header-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 10vw, 72px);
+    letter-spacing: 8px;
+    color: var(--accent);
+    text-shadow: 0 0 30px rgba(200,168,75,0.4);
+    line-height: 1;
+  }
+  .header-sub {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .header-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 6px;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+
+  /* NOTICE BARS */
+  .notice-bar {
+    background: #1a1a2e;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .notice-bar strong { color: var(--accent); }
+  .notice-bar .crypto-tag {
+    display: inline-block;
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0 3px;
+  }
+
+  /* CLOSED BANNER */
+  #closed-banner {
+    background: #7f1d1d;
+    border: 2px solid #ef4444;
+    color: #fca5a5;
+    text-align: center;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: none;
+  }
+
+  /* LAYOUT */
+  .main-layout {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 0;
+    padding: 0;
+  }
+
+  /* PRODUCT LIST */
+  .product-panel {
+    flex: 1;
+    padding: 16px;
+    min-width: 0;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+  }
+  .section-label.oils { color: #7ec8f5; border-color: var(--test-border); }
+  .section-label.tablets { color: #6fbf73; border-color: #3a6a3a; }
+
+  /* PRODUCT ROW */
+  .product-row {
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    padding: 10px 12px;
+    gap: 10px;
+    transition: border-color 0.2s;
+  }
+  .product-row:hover { border-color: var(--accent); }
+
+  /* SHIPPING ROW */
+  .product-row.shipping-item {
+    background: var(--shipping-bg);
+    border: 2px solid #ff7043;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    padding: 14px 12px;
+    box-shadow: 0 0 20px rgba(255,77,26,0.3);
+  }
+  .product-row.shipping-item .prod-code { color: #fff; background: rgba(0,0,0,0.3); }
+  .product-row.shipping-item .prod-name { color: #fff; font-weight: 700; font-size: 15px; }
+  .product-row.shipping-item .prod-detail { color: rgba(255,255,255,0.85); }
+  .product-row.shipping-item .prod-price { color: #fff; font-size: 20px; }
+
+  /* PRIMO ROW */
+  .product-row.primo-item {
+    background: var(--primo-bg);
+    border: 2px solid var(--primo-border);
+    box-shadow: 0 0 12px rgba(200,168,75,0.15);
+  }
+  .product-row.primo-item .prod-name { color: var(--primo-text); }
+  .product-row.primo-item .prod-badge-primo {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+  }
+
+  /* TEST ROW */
+  .product-row.test-item {
+    background: var(--test-bg);
+    border-color: var(--test-border);
+  }
+  .product-row.test-item .prod-name { color: var(--test-text); }
+
+  /* TABLET ROW */
+  .product-row.tablet-item {
+    background: var(--tablet-bg);
+    border-color: var(--tablet-border);
+  }
+
+  /* OOS ROW */
+  .product-row.oos {
+    opacity: 0.6;
+  }
+  .oos-badge {
+    font-size: 10px;
+    font-weight: 700;
+    background: #7f1d1d;
+    color: #fca5a5;
+    border: 1px solid #ef4444;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .prod-code {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 6px;
+    min-width: 56px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .prod-info { flex: 1; min-width: 0; }
+  .prod-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .prod-detail {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+  .prod-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    white-space: nowrap;
+    min-width: 48px;
+    text-align: right;
+  }
+
+  /* QTY CONTROLS */
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .qty-btn {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;align-items:center;justify-content:center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .qty-btn.minus {
+    background: var(--surface2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .qty-btn.minus:hover { background: #3a1a1a; color: var(--red); border-color: var(--red); }
+  .qty-btn.plus {
+    background: var(--accent);
+    color: #000;
+  }
+  .qty-btn.plus:hover { background: #e6c45a; }
+  .qty-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    min-width: 20px;
+    text-align: center;
+  }
+  .product-row.oos .qty-btn { opacity: 0.3; pointer-events: none; }
+
+  /* CART */
+  .cart-panel {
+    width: 300px;
+    flex-shrink: 0;
+    padding: 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-left: 1px solid var(--border);
+    background: var(--surface);
+  }
+  @media(max-width: 768px) {
+    .main-layout { flex-direction: column; }
+    .cart-panel { width: 100%; height: auto; position: static; border-left: none; border-top: 2px solid var(--border); }
+  }
+
+  .cart-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cart-count {
+    background: var(--accent);
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 2px 7px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  #cart-items { margin-bottom: 12px; }
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    gap: 8px;
+  }
+  .cart-item-name { color: var(--text); flex: 1; line-height: 1.3; }
+  .cart-item-name small { color: var(--text-muted); display: block; }
+  .cart-item-total { color: var(--accent); font-weight: 700; white-space: nowrap; }
+  .cart-empty { color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px 0; }
+
+  .cart-divider { border: none; border-top: 1px solid var(--border); margin: 8px 0; }
+
+  .cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .cart-summary-row.total {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 6px;
+  }
+  .cart-summary-row .label { color: var(--text-muted); }
+
+  .min-order-notice {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 8px 0;
+    padding: 6px;
+    background: var(--bg);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .min-order-notice.met { color: var(--green); border-color: var(--green); background: rgba(76,175,80,0.08); }
+  .min-order-notice.unmet { color: #fbbf24; border-color: #fbbf24; background: rgba(251,191,36,0.08); }
+
+  .checkout-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .checkout-btn:hover { background: #e6c45a; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(200,168,75,0.3); }
+  .checkout-btn:disabled { background: var(--surface2); color: var(--text-muted); cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .clear-cart-btn {
+    width: 100%;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: all 0.2s;
+  }
+  .clear-cart-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* WHATSAPP */
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: #25d366;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: all 0.2s;
+  }
+  .whatsapp-btn:hover { background: #1ebe5c; }
+
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; align-items: flex-start; justify-content: center; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+  }
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .form-group { margin-bottom: 14px; }
+  .form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .form-input, .form-select {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-input:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  /* ORDER SUMMARY in modal */
+  .order-summary-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 14px;
+    max-height: 180px;
+    overflow-y: auto;
+  }
+  .order-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 8px;
+  }
+  .order-summary-row:last-child { border-bottom: none; }
+  .order-summary-row .item-name { color: var(--text); flex: 1; }
+  .order-summary-row .item-price { color: var(--accent); font-weight: 700; white-space: nowrap; }
+
+  /* CRYPTO PAYMENT BOX */
+  .crypto-box {
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 14px;
+  }
+  .crypto-box-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .crypto-box p { font-size: 12px; color: var(--text); line-height: 1.6; }
+  .crypto-box .wallet {
+    font-family: monospace;
+    font-size: 11px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--accent);
+    word-break: break-all;
+    margin-top: 6px;
+    display: block;
+  }
+  .crypto-accepted {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .crypto-tag-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* SUBMIT BTN */
+  .submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 4px;
+  }
+  .submit-btn:hover { background: #e6c45a; }
+  .submit-btn:disabled { background: var(--surface2); color: var(--text-muted); cursor: not-allowed; }
+
+  .modal-close-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 7px;
+    padding: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s;
+  }
+  .modal-close-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* SUCCESS */
+  .success-box {
+    text-align: center;
+    padding: 20px;
+  }
+  .success-icon { font-size: 48px; margin-bottom: 12px; }
+  .success-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--green);
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+  .success-msg { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ADMIN */
+  .admin-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 50%;
+    width: 44px; height: 44px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .admin-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .admin-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+  }
+  .admin-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .admin-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .toggle-btn {
+    padding: 8px 18px;
+    border-radius: 7px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .toggle-btn.open { background: var(--green); color: #fff; }
+  .toggle-btn.closed { background: var(--red); color: #fff; }
+  .status-indicator {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+  .status-indicator.open { background: rgba(76,175,80,0.15); color: var(--green); border: 1px solid var(--green); }
+  .status-indicator.closed { background: rgba(244,67,54,0.15); color: var(--red); border: 1px solid var(--red); }
+
+  .order-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .order-card-name { font-weight: 700; color: var(--accent); font-size: 15px; }
+  .order-card-date { font-size: 11px; color: var(--text-muted); }
+  .order-card-items { font-size: 12px; color: var(--text); line-height: 1.6; margin-bottom: 8px; }
+  .order-card-total { font-size: 14px; font-weight: 700; color: var(--accent); }
+
+  .copy-kaka-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .copy-kaka-btn:hover { background: #e6c45a; }
+  .copy-kaka-btn.copied { background: var(--green); color: #fff; }
+
+  .admin-login {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .admin-login input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-size: 14px;
+    width: 200px;
+    text-align: center;
+    letter-spacing: 4px;
+    font-family: 'Inter', sans-serif;
+  }
+  .admin-login input:focus { outline: none; border-color: var(--accent); }
+  .admin-login-btn {
+    display: block;
+    margin: 10px auto 0;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 24px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .admin-error { color: var(--red); font-size: 12px; margin-top: 8px; }
+
+  .no-orders { color: var(--text-muted); text-align: center; padding: 20px; font-size: 13px; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;">
+  <img src="data:image/jpeg;base64,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" style="height:100px;width:auto;border-radius:8px;" alt="YD Anabolics">
+  <div style="text-align:center;flex:1;">
+    <div class="header-logo">YD</div>
+    <div class="header-sub">Anabolics Order Portal</div>
+    <div class="header-year">PRICE SHEET 2026</div>
+  </div>
+  <img src="data:image/jpeg;base64,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" style="height:100px;width:auto;border-radius:8px;" alt="BGM BioStack">
+</div>
+
+<!-- NOTICE BAR -->
+<div class="notice-bar">
+  <strong>⚠️ CRYPTO ONLY</strong> — Accepted:
+  <span class="crypto-tag">USDC</span>
+  <span class="crypto-tag">USDT</span>
+  on Ethereum Network &nbsp;|&nbsp;
+  <strong>🚚 Average Ship Time: 4 Weeks</strong> &nbsp;|&nbsp;
+  Free reship if seized at customs (1x)
+</div>
+
+<!-- CLOSED BANNER -->
+<div id="closed-banner">⛔ ORDERS ARE CURRENTLY CLOSED ⛔</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- PRODUCT LIST -->
+  <div class="product-panel" id="product-panel">
+
+    <!-- PER VIAL NOTICE -->
+    <div style="background:var(--surface2);border:1px solid var(--accent);border-radius:8px;padding:10px 14px;margin-bottom:14px;text-align:center;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:0.5px;">
+      💊 Prices are per vial &nbsp;•&nbsp; Minimum order: 10 vials (any mix) &nbsp;•&nbsp; Shipping must be added to every order
+    </div>
+
+    <!-- SHIPPING FIRST -->
+    <div class="section-label" style="color:var(--shipping-bg);border-color:var(--shipping-bg)">⚡ REQUIRED — ADD TO EVERY ORDER</div>
+    <div class="product-row shipping-item" data-code="SHIP" data-name="USPS Shipping — China to USA" data-price="75" data-type="shipping">
+      <div class="prod-code">SHIP</div>
+      <div class="prod-info">
+        <div class="prod-name">🚚 USPS SHIPPING — CHINA TO USA</div>
+        <div class="prod-detail">Every order must include shipping • 4 week delivery • Free reship if seized (1x) • Does NOT count toward 10 vial minimum</div>
+      </div>
+      <div class="prod-price">$75</div>
+      <div class="qty-control">
+        <button class="qty-btn minus" onclick="updateQty('SHIP',-1)">−</button>
+        <span class="qty-num" id="qty-SHIP">0</span>
+        <button class="qty-btn plus" onclick="updateQty('SHIP',1)">+</button>
+      </div>
+    </div>
+
+    <!-- PRIMO TOP -->
+    <div class="section-label" style="color:var(--primo-text);border-color:var(--primo-border)">🥇 PRIMOBOLAN — OIL</div>
+    <div class="product-row primo-item" data-code="M100" data-name="Methenolone Enanthate 100" data-price="110">
+      <div class="prod-code">M100</div>
+      <div class="prod-info">
+        <div class="prod-name">METHENOLONE ENANTHATE 100 <span class="prod-badge-primo">PRIMO</span></div>
+        <div class="prod-detail">10ml x 100mg/ml/vial</div>
+      </div>
+      <div class="prod-price">$110</div>
+      <div class="qty-control">
+        <button class="qty-btn minus" onclick="updateQty('M100',-1)">−</button>
+        <span class="qty-num" id="qty-M100">0</span>
+        <button class="qty-btn plus" onclick="updateQty('M100',1)">+</button>
+      </div>
+    </div>
+    <div class="product-row primo-item" data-code="M200" data-name="Methenolone Enanthate 200" data-price="166">
+      <div class="prod-code">M200</div>
+      <div class="prod-info">
+        <div class="prod-name">METHENOLONE ENANTHATE 200 <span class="prod-badge-primo">PRIMO</span></div>
+        <div class="prod-detail">10ml x 200mg/ml/vial</div>
+      </div>
+      <div class="prod-price">$166</div>
+      <div class="qty-control">
+        <button class="qty-btn minus" onclick="updateQty('M200',-1)">−</button>
+        <span class="qty-num" id="qty-M200">0</span>
+        <button class="qty-btn plus" onclick="updateQty('M200',1)">+</button>
+      </div>
+    </div>
+
+    <!-- TESTOSTERONE OILS -->
+    <div class="section-label oils">💉 TESTOSTERONE — OIL</div>
+
+    <!-- Products rendered by JS below -->
+    <div id="test-products"></div>
+    <div class="section-label" style="color:#c084fc;border-color:#7c3aed">🧪 TRENBOLONE & BLENDS — OIL</div>
+    <div id="tren-products"></div>
+    <div class="section-label" style="color:#f9a8d4;border-color:#9d174d">💊 NANDROLONE / WINSTROL / EQ / OTHER — OIL</div>
+    <div id="other-products"></div>
+    <div class="section-label tablets">🔬 TABLETS</div>
+    <div id="tablet-products"></div>
+
+  </div>
+
+  <!-- CART -->
+  <div class="cart-panel">
+    <div class="cart-title">
+      CART <span class="cart-count" id="cart-count">0</span>
+    </div>
+    <div id="cart-items"><div class="cart-empty">No items added yet</div></div>
+    <hr class="cart-divider">
+    <div class="cart-summary-row">
+      <span class="label">Subtotal</span>
+      <span id="cart-subtotal">$0</span>
+    </div>
+    <div class="cart-summary-row total">
+      <span>TOTAL</span>
+      <span id="cart-total">$0</span>
+    </div>
+    <div class="min-order-notice unmet" id="min-notice">
+      Minimum order: 10 vials (not counting shipping)
+    </div>
+    <button class="checkout-btn" id="checkout-btn" disabled onclick="openCheckout()">CHECKOUT</button>
+    <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+    <a href="YOUR_WHATSAPP_LINK_HERE" target="_blank" class="whatsapp-btn">
+      💬 WhatsApp Group
+    </a>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal">
+    <div id="checkout-content">
+      <div class="modal-title">PLACE ORDER</div>
+
+      <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <select class="form-select" id="order-name">
+          <option value="">— Select Name —</option>
+          <option value="Self">Self</option>
+          <option value="Boyd">Boyd</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input type="tel" class="form-input" id="order-phone" placeholder="(555) 555-5555">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="order-email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Connection / Delivery</label>
+        <select class="form-select" id="order-connection">
+          <option value="">— Select —</option>
+          <option value="Pickup - Work">Pickup — Work</option>
+          <option value="Pickup - Other">Pickup — Other</option>
+          <option value="Ship - USPS">Ship — USPS to My Address</option>
+        </select>
+      </div>
+
+      <label class="form-label" style="margin-bottom:6px;">Order Summary</label>
+      <div class="order-summary-box" id="modal-order-summary"></div>
+
+      <div class="cart-summary-row" style="margin-bottom:4px;">
+        <span class="label" style="font-size:13px;">Subtotal</span>
+        <span id="modal-subtotal" style="color:var(--text);font-size:13px;">$0</span>
+      </div>
+      <div class="cart-summary-row" style="font-size:17px;font-weight:700;color:var(--accent);margin-bottom:12px;">
+        <span>TOTAL</span>
+        <span id="modal-total">$0</span>
+      </div>
+
+      <div class="crypto-box">
+        <div class="crypto-box-title">💎 Payment — Crypto Only</div>
+        <p>Send exact amount to wallet below. <strong>Ethereum Network only.</strong> After sending, include your TX hash in the WhatsApp group.</p>
+        <div class="crypto-accepted">
+          <span class="crypto-tag-item">USDC</span>
+          <span class="crypto-tag-item">USDT</span>
+          <span class="crypto-tag-item">ETH Network</span>
+        </div>
+        <span class="wallet" id="wallet-address">0x85A165217426c4262BCb6812D6936BbE305F937B</span>
+        <button onclick="copyWallet()" id="copy-wallet-btn" style="margin-top:8px;width:100%;background:var(--surface2);border:1px solid var(--accent);color:var(--accent);border-radius:6px;padding:8px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.2s;">📋 COPY WALLET ADDRESS</button>
+      </div>
+
+      <button class="submit-btn" id="submit-btn" onclick="submitOrder()">SUBMIT ORDER</button>
+      <button class="modal-close-btn" onclick="closeCheckout()">Cancel</button>
+    </div>
+
+    <div id="success-content" style="display:none;">
+      <div class="success-box">
+        <div class="success-icon">✅</div>
+        <div class="success-title">ORDER RECEIVED</div>
+        <div class="success-msg">Your order has been submitted.<br>Send crypto payment to the wallet address.<br>Then post your TX hash in the WhatsApp group.<br><br><strong>Avg shipping time: 4 weeks.</strong><br>Free reship if seized at customs (1x).</div>
+        <button class="submit-btn" style="margin-top:20px;" onclick="closeCheckout()">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN BUTTON -->
+<button class="admin-btn" onclick="openAdmin()" title="Admin">⚙️</button>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="admin-modal">
+  <div class="admin-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div class="admin-title">ADMIN — YD 2026</div>
+      <button class="modal-close-btn" style="width:auto;padding:8px 16px;" onclick="closeAdmin()">Close</button>
+    </div>
+    <div id="admin-login-screen">
+      <div class="admin-login">
+        <p style="color:var(--text-muted);font-size:13px;margin-bottom:14px;">Enter admin password</p>
+        <input type="password" id="admin-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdminPw()">
+        <button class="admin-login-btn" onclick="checkAdminPw()">ENTER</button>
+        <div class="admin-error" id="admin-error"></div>
+      </div>
+    </div>
+    <div id="admin-dashboard" style="display:none;">
+      <div class="admin-controls">
+        <span class="status-indicator" id="status-indicator">Loading...</span>
+        <button class="toggle-btn open" id="toggle-open-btn" onclick="setPortalOpen(true)">Set OPEN</button>
+        <button class="toggle-btn closed" id="toggle-close-btn" onclick="setPortalOpen(false)">Set CLOSED</button>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;" id="order-count-label">Loading orders...</div>
+      <div id="orders-list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// SUPABASE CONFIG — Replace with your credentials
+// ============================================================
+const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
+const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+const ADMIN_PASSWORD = 'BgM2026!';
+
+// ============================================================
+// PRODUCT DATA
+// ============================================================
+const PRODUCTS = {
+  test: [
+    { code:'C250', name:'TC250 Testosterone Cypionate', detail:'10ml x 250mg/ml/vial', price:36 },
+    { code:'E250', name:'TE250 Testosterone Enanthate', detail:'10ml x 250mg/ml/vial', price:36 },
+    { code:'E300', name:'TE300 Testosterone Enanthate', detail:'10ml x 300mg/ml/vial', price:40 },
+    { code:'TY300', name:'TU300 Testosterone Undecanoate', detail:'10ml x 300mg/ml/vial', price:40 },
+    { code:'P100', name:'TP100 Testosterone Propionate', detail:'10ml x 100mg/ml/vial', price:28 },
+    { code:'P200', name:'TP200 Testosterone Propionate', detail:'10ml x 200mg/ml/vial', price:36 },
+    { code:'SP100', name:'TS100 Testosterone Suspension', detail:'Test Prop 12mg, Isocaproate 24mg, Phenylprop 24mg, Decanoate 40mg • 10ml x 100mg/vial', price:36 },
+    { code:'BA100', name:'Test Base 100mg (TNE — No Ester)', detail:'10ml x 100mg/ml', price:36 },
+    { code:'S400', name:'SU400 Blend', detail:'Test Prop 48mg, Phenylprop 96mg, Isocaproate 96mg, Decanoate 160mg • 10ml x 400mg/ml/vial', price:42 },
+    { code:'S250', name:'Sustanon 250', detail:'Test Prop 30mg, Isocaproate 60mg, Phenylprop 60mg, Decanoate 100mg • 10ml x 250mg/ml/vial', price:36 },
+    { code:'S450', name:'Supertest 450', detail:'Phenylprop 73mg, Acetate 32mg, Decanoate 147mg, Prop 73mg, Cyp 125mg • 10ml x 450mg/ml/vial', price:42 },
+    { code:'T600', name:'Testo-600', detail:'Test Acetate 180mg, TPP 220mg, Cyp 200mg • 10ml x 600mg/vial', price:42 },
+  ],
+  tren: [
+    { code:'R100', name:'TRA100 Trenbolone Acetate', detail:'10ml x 100mg/ml/vial', price:46 },
+    { code:'RY100', name:'TRE100 Trenbolone Enanthate', detail:'10ml x 100mg/ml/vial', price:46 },
+    { code:'R200', name:'TRE200 Trenbolone Enanthate', detail:'10ml x 200mg/ml/vial', price:72 },
+    { code:'H100', name:'TrX-100 Trenbolone Hexahydrobenzyl Carbonate', detail:'10ml x 100mg/ml/vial', price:106 },
+    { code:'RM200', name:'TRENMIX200', detail:'Tren Acetate 75mg, Tren Enanthate 125mg • 10ml x 200mg/ml/vial', price:66 },
+    { code:'3R225', name:'TriTren 225', detail:'TRA 75mg, TRE 75mg, TRH 75mg • 10ml x 200mg/vial', price:106 },
+    { code:'BR50', name:'TRB50 Trenbolone Base', detail:'10ml x 50mg/vial', price:40 },
+    { code:'B300', name:'BLEND300', detail:'Tren Acetate 100mg, Drostanolone Prop 100mg, Test Prop 100mg • 10ml x 300mg/ml/vial', price:86 },
+    { code:'B375', name:'BLEND375', detail:'Tren Enan 125mg, Drostanolone Enan 125mg, Test Enan 125mg • 10ml x 375mg/ml/vial', price:106 },
+    { code:'B500', name:'BLEND500', detail:'Tren Enan 250mg, Drostanolone Enan 250mg • 10ml x 500mg/ml/vial', price:126 },
+  ],
+  other: [
+    { code:'N200', name:'DECA 200 — Nandrolone Decanoate', detail:'10ml x 200mg/ml/vial', price:42 },
+    { code:'N300', name:'DECA 300 — Nandrolone Decanoate', detail:'10ml x 300mg/ml/vial', price:46 },
+    { code:'NM300', name:'NandroMix300', detail:'Nandrolone Phenylprop 100mg, Nandrolone Decanoate 200mg • 10ml x 300mg/ml/vial', price:66 },
+    { code:'PN100', name:'NPP100 — Nandrolone PhenylPropionate', detail:'10ml x 100mg/ml/vial', price:36 },
+    { code:'PN200', name:'NPP200 — Nandrolone PhenylPropionate', detail:'10ml x 200mg/ml/vial', price:42 },
+    { code:'SO50', name:'STANOZOLOL Oil Base 50mg (Winstrol)', detail:'10ml x 50mg/ml/vial', price:32 },
+    { code:'SO100', name:'STANOZOLOL Oil Base 100mg (Winstrol)', detail:'10ml x 100mg/ml/vial', price:42 },
+    { code:'SW50', name:'Winstrol Suspension 50mg', detail:'STANOZOLOL suspension • 10ml x 50mg/ml/vial', price:36 },
+    { code:'SW100', name:'Winstrol Suspension 100mg', detail:'STANOZOLOL suspension • 10ml x 100mg/ml/vial', price:42 },
+    { code:'U200', name:'BU200 EQ — Boldenone Undecyleate', detail:'10ml x 200mg/ml/vial', price:36 },
+    { code:'U300', name:'BU300 EQ — Boldenone Undecyleate', detail:'10ml x 300mg/ml/vial', price:40 },
+    { code:'U600', name:'BU600 EQ — Boldenone Undecyleate', detail:'10ml x 600mg/ml/vial', price:60 },
+    { code:'BS250', name:'BC250 — Boldenone Cypionate', detail:'10ml x 250mg/ml/vial', price:42, oos:true },
+    { code:'D100', name:'Masteron 100 (DP100) — Drostanolone Propionate', detail:'10ml x 100mg/ml/vial', price:56, oos:true },
+    { code:'D200', name:'MAST200 (MAST E) — Drostanolone Enanthate', detail:'10ml x 200mg/ml/vial', price:86, oos:true },
+    { code:'DM200', name:'MAST Blend200', detail:'Drostanolone Enan 150mg, Drostanolone Prop 50mg • 10ml x 200mg/ml/vial', price:86 },
+    { code:'DO50', name:'Dianabol 50 — Oil (Methandrostenolone)', detail:'10ml x 50mg/ml/vial', price:40 },
+    { code:'OXO50', name:'Anadrol 50 — Oil (Oxymetholone)', detail:'10ml x 50mg/ml/vial', price:40 },
+    { code:'1T100', name:'DHB100 (1-Testosterone Cypionate)', detail:'Dihydrobodenone • 10ml x 100mg/ml/vial', price:52 },
+    { code:'MN50', name:'MENT 50 — Trestolone Acetate', detail:'10ml x 50mg/ml/vial', price:126 },
+    { code:'HD50', name:'Stanolone DHT 50mg', detail:'10ml x 50mg/ml/vial', price:40 },
+    { code:'SDO50', name:'Superdrol 50mg — Oil (Methyldrostanolone)', detail:'10ml x 50mg/ml/vial', price:36 },
+    { code:'BM5', name:'Metribolone 5mg', detail:'10ml x 5mg/ml/vial', price:106 },
+    { code:'NJ100', name:'NAD+ 100mg', detail:'10ml x 100mg/ml/vial', price:36 },
+  ],
+  tablets: [
+    { code:'CB40', name:'Clenbuterol 40mcg', detail:'100 tablets/bottle', price:76 },
+    { code:'CD50', name:'Clomifene 50mg', detail:'50mg x 100 tablets/box', price:76 },
+    { code:'LZ25', name:'Letrozole 2.5mg (Femara)', detail:'2.5mg x 100 tablets/bottle', price:80 },
+    { code:'FX10', name:'Fluoxymesterone 10mg (Halotestin)', detail:'10mg x 100 tablets/bottle', price:150 },
+    { code:'D10', name:'Dianabol 10mg (Methandienone)', detail:'10mg x 100 tablets/bottle', price:56 },
+    { code:'D20', name:'Dianabol 20mg (Methandienone)', detail:'20mg x 100 tablets/bottle', price:66 },
+    { code:'D50', name:'Dianabol 50mg (Methandienone)', detail:'50mg x 100 tablets/bottle', price:86 },
+    { code:'P10', name:'Proviron 10mg (Mesterolone)', detail:'10mg x 100 tablets/bottle', price:56 },
+    { code:'P25', name:'Proviron 25mg (Mesterolone)', detail:'25mg x 100 tablets/bottle', price:76 },
+    { code:'M10', name:'Primobolan Tabs 10mg (Methenolone Acetate)', detail:'10mg x 100 tablets/bottle', price:106 },
+    { code:'M25', name:'Primobolan Tabs 25mg (Methenolone Acetate)', detail:'25mg x 100 tablets/bottle', price:156 },
+    { code:'M50', name:'Primobolan Tabs 50mg (Methenolone Acetate)', detail:'50mg x 100 tablets/bottle', price:266 },
+    { code:'SD10', name:'Superdrol 10mg (Methyldrostanolone)', detail:'10mg x 100 tablets/bottle', price:76 },
+    { code:'325', name:'T3 25mcg (Liothyronine Sodium)', detail:'25mcg x 100 tablets/bottle', price:36 },
+    { code:'340', name:'T3 40mcg (Liothyronine Sodium)', detail:'40mcg x 100 tablets/bottle', price:50 },
+    { code:'440', name:'T4 40mcg', detail:'40mcg x 100 tablets/bottle', price:50 },
+    { code:'X10', name:'Anavar 10mg (Oxandrolone)', detail:'10mg x 100 tablets/bottle', price:76 },
+    { code:'X25', name:'Anavar 25mg (Oxandrolone)', detail:'25mg x 100 tablets/bottle', price:100 },
+    { code:'X50', name:'Anavar 50mg (Oxandrolone)', detail:'50mg x 100 tablets/bottle', price:126 },
+    { code:'OXP50', name:'Anadrol 50mg (Oxymetholone)', detail:'50mg x 100 tablets/bottle', price:100 },
+    { code:'W10', name:'Winstrol 10mg (Stanozolol)', detail:'10mg x 100 tablets/bottle', price:56 },
+    { code:'W20', name:'Winstrol 20mg (Stanozolol)', detail:'20mg x 100 tablets/bottle', price:66 },
+    { code:'W50', name:'Winstrol 50mg (Stanozolol)', detail:'50mg x 100 tablets/bottle', price:100 },
+    { code:'CT10', name:'Turinabol 10mg', detail:'10mg x 100 tablets/bottle', price:56 },
+    { code:'CT25', name:'Turinabol 25mg', detail:'25mg x 100 tablets/bottle', price:76 },
+    { code:'CT50', name:'Turinabol 50mg', detail:'50mg x 100 tablets/bottle', price:126 },
+    { code:'T20', name:'Tamoxifen / Nolvadex 20mg', detail:'20mg x 100 tablets/bottle', price:62 },
+    { code:'XE25', name:'Aromasin / Exemestane 25mg', detail:'25mg x 100 tablets/bottle', price:106 },
+    { code:'DEX1', name:'Anastrozole / Arimidex 1mg', detail:'1mg x 100 tablets/bottle', price:70 },
+    { code:'SD100', name:'Viagra / Sildenafil 100mg', detail:'100mg x 100 tablets/bottle', price:80 },
+    { code:'DT20', name:'Cialis / Tadanafil 20mg', detail:'20mg x 100 tablets/bottle', price:62 },
+    { code:'B70', name:'Cock Bombs 70mg', detail:'70mg x 100 tablets/bottle', price:62 },
+    { code:'1TT10', name:'DHB 1-Testosterone Cypionate 10mg', detail:'10mg x 100 tablets/bottle', price:76 },
+    { code:'SB20', name:'Salbutamol 20mg', detail:'20mg x 100 tablets/bottle', price:66 },
+    { code:'MSB10', name:'Methylstenbolone 10mg', detail:'10mg x 100 tablets/bottle', price:126 },
+    { code:'T500', name:'Tesofensine 500mcg', detail:'500mcg x 100 tablets/bottle', price:96 },
+    { code:'L40', name:'LGD-4033 / Ligandrol 10mg', detail:'10mg x 100 tablets', price:106 },
+    { code:'M6', name:'MK-677 / Ibutamoren 10mg', detail:'10mg x 100 tablets', price:130 },
+    { code:'S9', name:'SR9009 10mg', detail:'10mg x 100 tablets', price:166 },
+    { code:'R14', name:'RAD140 10mg', detail:'10mg x 100 tablets', price:170 },
+    { code:'M28', name:'Ostarine / MK-2866 25mg', detail:'25mg x 100 tablets', price:96 },
+    { code:'A10', name:'AICAR 10mg', detail:'10mg x 100 tablets', price:176 },
+    { code:'S040', name:'Andarine S4 25mg', detail:'25mg x 100 tablets', price:96 },
+    { code:'G50', name:'GW-501516 / Cardarine 10mg', detail:'10mg x 100 tablets', price:96 },
+    { code:'Y1', name:'YK11 10mg', detail:'10mg x 100 tablets', price:186 },
+    { code:'CG25', name:'Cabergoline 0.25mg', detail:'0.25mg x 100 tablets', price:186 },
+    { code:'FS5', name:'Finasteride 5mg', detail:'5mg x 100 tablets', price:66 },
+    { code:'FB100', name:'Flibanserin 100mg', detail:'100mg x 30 tablets', price:56 },
+    { code:'M1T10', name:'17a-Methyl-1-testosterone M1T 10mg', detail:'10mg x 100 tablets', price:76 },
+    { code:'PDN10', name:'Prednisone 10mg', detail:'10mg x 100 tablets', price:56 },
+    { code:'PND', name:'DNP Capsule 200mg', detail:'200mg x 50pcs', price:106 },
+    { code:'B157', name:'BPC Tablets 500mcg', detail:'500mcg x 100pcs', price:136 },
+    { code:'BC500', name:'BPC Capsule 500mcg', detail:'500mcg x 60pcs', price:106 },
+    { code:'SM500', name:'Semaglutide 500mcg', detail:'500mcg x 25pcs', price:56 },
+    { code:'SMM3', name:'Semaglutide 3mg', detail:'3mg x 25pcs', price:146 },
+    { code:'SMM7', name:'Semaglutide 7mg', detail:'7mg x 25pcs', price:226 },
+    { code:'TR500', name:'Tirzepatide 500mcg', detail:'500mcg x 25pcs', price:106 },
+    { code:'AMQ50', name:'5-Amino-1MQ 50mg', detail:'50mg x 25pcs', price:86 },
+    { code:'EC25', name:'Enclomiphene (Androxal) 25mg', detail:'25mg x 100pcs', price:186 },
+    { code:'TM40', name:'Telmisartan 40mg', detail:'40mg x 100pcs', price:62 },
+    { code:'FAN1', name:'Finasteride 1mg', detail:'1mg x 100pcs', price:56 },
+    { code:'DUT1', name:'Dutasteride 1mg', detail:'1mg x 100pcs', price:56 },
+    { code:'LV5', name:'Ivermectin 5mg', detail:'5mg x 100pcs', price:56 },
+    { code:'SLU250', name:'SLU-PP-332 250mcg', detail:'250mcg x 100pcs', price:66 },
+    { code:'SLU500', name:'SLU-PP-332 500mcg', detail:'500mcg x 100pcs', price:96 },
+    { code:'SLU1000', name:'SLU-PP-332 1000mcg', detail:'1000mcg x 100pcs', price:126 },
+    { code:'SLU5', name:'SLU-PP-332 5mg', detail:'5mg x 100pcs', price:186 },
+    { code:'SLU20', name:'SLU-PP-332 20mg', detail:'20mg x 100pcs', price:226 },
+    { code:'MD5', name:'Minoxidil 5mg', detail:'5mg x 100pcs', price:46 },
+    { code:'KP500', name:'KPV 500mcg', detail:'500mcg x 100pcs', price:146 },
+    { code:'BB500', name:'BPC 500mcg + TB500 500mcg', detail:'1000mcg x 100pcs', price:346 },
+    { code:'MB20', name:'Methylene Blue 20mg', detail:'20mg x 100pcs', price:46 },
+    { code:'BAM50', name:'BAM15 Capsule 50mg', detail:'50mg x 60pcs', price:306 },
+    { code:'SB300', name:'SLUPP-332 250mcg + BAM15 50mcg Capsule', detail:'300mcg x 60pcs', price:346 },
+    { code:'ORF6', name:'Orforglipron 6mg', detail:'6mg x 100pcs', price:326 },
+    { code:'ORF12', name:'Orforglipron 12mg', detail:'12mg x 100pcs', price:526 },
+  ]
+};
+
+// ============================================================
+// CART STATE
+// ============================================================
+let cart = {}; // code -> qty
+
+function getProductByCode(code) {
+  for (const section of Object.values(PRODUCTS)) {
+    const found = section.find(p => p.code === code);
+    if (found) return found;
+  }
+  // Check special items
+  if (code === 'SHIP') return { code:'SHIP', name:'USPS Shipping — China to USA', price:75, isShipping:true };
+  if (code === 'M100') return { code:'M100', name:'Methenolone Enanthate 100 (Primo)', price:110 };
+  if (code === 'M200') return { code:'M200', name:'Methenolone Enanthate 200 (Primo)', price:166 };
+  return null;
+}
+
+function updateQty(code, delta) {
+  const p = getProductByCode(code);
+  if (!p) return;
+  const current = cart[code] || 0;
+  const newVal = Math.max(0, current + delta);
+  // Shipping max 1
+  if (p.isShipping && newVal > 1) return;
+  if (newVal === 0) delete cart[code];
+  else cart[code] = newVal;
+  document.getElementById('qty-' + code).textContent = newVal;
+  renderCart();
+}
+
+function renderCart() {
+  const cartEl = document.getElementById('cart-items');
+  const codes = Object.keys(cart);
+  if (codes.length === 0) {
+    cartEl.innerHTML = '<div class="cart-empty">No items added yet</div>';
+    document.getElementById('cart-count').textContent = '0';
+    document.getElementById('cart-subtotal').textContent = '$0';
+    document.getElementById('cart-total').textContent = '$0';
+    updateMinNotice(0);
+    document.getElementById('checkout-btn').disabled = true;
+    return;
+  }
+
+  let html = '';
+  let subtotal = 0;
+  let vialCount = 0;
+
+  codes.forEach(code => {
+    const p = getProductByCode(code);
+    if (!p) return;
+    const qty = cart[code];
+    const lineTotal = p.price * qty;
+    subtotal += lineTotal;
+    if (!p.isShipping) vialCount += qty;
+    html += `<div class="cart-item">
+      <div class="cart-item-name">${p.name}<small>${code} × ${qty}</small></div>
+      <div class="cart-item-total">$${lineTotal}</div>
+    </div>`;
+  });
+
+  cartEl.innerHTML = html;
+  const totalCount = codes.reduce((s, c) => s + cart[c], 0);
+  document.getElementById('cart-count').textContent = totalCount;
+  document.getElementById('cart-subtotal').textContent = '$' + subtotal;
+  document.getElementById('cart-total').textContent = '$' + subtotal;
+  updateMinNotice(vialCount);
+  document.getElementById('checkout-btn').disabled = vialCount < 10;
+}
+
+function updateMinNotice(vialCount) {
+  const el = document.getElementById('min-notice');
+  if (vialCount >= 10) {
+    el.textContent = `✅ ${vialCount} vials — Minimum met`;
+    el.className = 'min-order-notice met';
+  } else {
+    el.textContent = `Minimum: 10 vials — You have ${vialCount} (shipping doesn't count)`;
+    el.className = 'min-order-notice unmet';
+  }
+}
+
+function clearCart() {
+  cart = {};
+  document.querySelectorAll('.qty-num').forEach(el => el.textContent = '0');
+  renderCart();
+}
+
+// ============================================================
+// RENDER PRODUCTS
+// ============================================================
+function renderSection(containerId, products, rowClass) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = products.map(p => `
+    <div class="product-row ${rowClass} ${p.oos ? 'oos' : ''}" data-code="${p.code}">
+      <div class="prod-code">${p.code}</div>
+      <div class="prod-info">
+        <div class="prod-name">${p.name}${p.oos ? ' <span class="oos-badge">OUT OF STOCK</span>' : ''}</div>
+        <div class="prod-detail">${p.detail}</div>
+      </div>
+      <div class="prod-price">$${p.price}</div>
+      <div class="qty-control">
+        <button class="qty-btn minus" onclick="updateQty('${p.code}',-1)">−</button>
+        <span class="qty-num" id="qty-${p.code}">0</span>
+        <button class="qty-btn plus" onclick="updateQty('${p.code}',1)" ${p.oos ? 'disabled' : ''}>+</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+renderSection('test-products', PRODUCTS.test, 'test-item');
+renderSection('tren-products', PRODUCTS.tren, '');
+renderSection('other-products', PRODUCTS.other, '');
+renderSection('tablet-products', PRODUCTS.tablets, 'tablet-item');
+
+// ============================================================
+// CHECKOUT
+// ============================================================
+function openCheckout() {
+  document.getElementById('checkout-content').style.display = '';
+  document.getElementById('success-content').style.display = 'none';
+  // Build summary
+  let summaryHtml = '';
+  let subtotal = 0;
+  Object.keys(cart).forEach(code => {
+    const p = getProductByCode(code);
+    if (!p) return;
+    const qty = cart[code];
+    const lt = p.price * qty;
+    subtotal += lt;
+    summaryHtml += `<div class="order-summary-row">
+      <span class="item-name">${p.name} × ${qty}</span>
+      <span class="item-price">$${lt}</span>
+    </div>`;
+  });
+  document.getElementById('modal-order-summary').innerHTML = summaryHtml;
+  document.getElementById('modal-subtotal').textContent = '$' + subtotal;
+  document.getElementById('modal-total').textContent = '$' + subtotal;
+  document.getElementById('checkout-modal').classList.add('active');
+}
+
+function closeCheckout() {
+  document.getElementById('checkout-modal').classList.remove('active');
+}
+
+async function submitOrder() {
+  const name = document.getElementById('order-name').value;
+  const phone = document.getElementById('order-phone').value;
+  const email = document.getElementById('order-email').value;
+  const connection = document.getElementById('order-connection').value;
+  if (!name || !phone || !email || !connection) {
+    alert('Please fill in all fields.');
+    return;
+  }
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'SUBMITTING...';
+
+  const items = Object.keys(cart).map(code => {
+    const p = getProductByCode(code);
+    return { code, name: p.name, qty: cart[code], price: p.price, lineTotal: p.price * cart[code] };
+  });
+  const subtotal = items.reduce((s, i) => s + i.lineTotal, 0);
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/yd_orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ date: dateStr, name, phone, email, connection, items, subtotal, total: subtotal })
+    });
+    if (!res.ok) throw new Error('DB error');
+    document.getElementById('checkout-content').style.display = 'none';
+    document.getElementById('success-content').style.display = '';
+    clearCart();
+  } catch(e) {
+    alert('Error submitting order. Check Supabase credentials.');
+    btn.disabled = false;
+    btn.textContent = 'SUBMIT ORDER';
+  }
+}
+
+// ============================================================
+// ADMIN
+// ============================================================
+let adminAuthed = false;
+let isPortalOpen = true;
+
+function openAdmin() {
+  document.getElementById('admin-modal').classList.add('active');
+  if (!adminAuthed) {
+    document.getElementById('admin-login-screen').style.display = '';
+    document.getElementById('admin-dashboard').style.display = 'none';
+  }
+}
+function closeAdmin() {
+  document.getElementById('admin-modal').classList.remove('active');
+}
+
+function checkAdminPw() {
+  const pw = document.getElementById('admin-pw').value;
+  if (pw === ADMIN_PASSWORD) {
+    adminAuthed = true;
+    document.getElementById('admin-login-screen').style.display = 'none';
+    document.getElementById('admin-dashboard').style.display = '';
+    loadAdminData();
+  } else {
+    document.getElementById('admin-error').textContent = 'Wrong password.';
+  }
+}
+
+async function loadAdminData() {
+  // Load portal status
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/yd_settings?select=*&limit=1`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const data = await res.json();
+    if (data && data[0]) {
+      isPortalOpen = data[0].is_open;
+      updateStatusUI();
+    }
+  } catch(e) {}
+
+  // Load orders
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/yd_orders?select=*&order=id.desc`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const orders = await res.json();
+    renderOrders(orders);
+  } catch(e) {
+    document.getElementById('orders-list').innerHTML = '<div class="no-orders">Error loading orders. Check Supabase config.</div>';
+  }
+}
+
+function updateStatusUI() {
+  const ind = document.getElementById('status-indicator');
+  ind.textContent = isPortalOpen ? '🟢 OPEN' : '🔴 CLOSED';
+  ind.className = 'status-indicator ' + (isPortalOpen ? 'open' : 'closed');
+  document.getElementById('closed-banner').style.display = isPortalOpen ? 'none' : 'block';
+}
+
+async function setPortalOpen(val) {
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/yd_settings?id=eq.1`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ is_open: val })
+    });
+    isPortalOpen = val;
+    updateStatusUI();
+  } catch(e) { alert('Error updating status.'); }
+}
+
+function renderOrders(orders) {
+  const el = document.getElementById('orders-list');
+  document.getElementById('order-count-label').textContent = `${orders.length} order${orders.length !== 1 ? 's' : ''} total`;
+  if (!orders || orders.length === 0) {
+    el.innerHTML = '<div class="no-orders">No orders yet.</div>';
+    return;
+  }
+  el.innerHTML = orders.map(o => {
+    const items = Array.isArray(o.items) ? o.items : [];
+    const itemsText = items.map(i => `${i.name} × ${i.qty} — $${i.lineTotal}`).join('\n');
+    return `<div class="order-card">
+      <div class="order-card-header">
+        <div>
+          <div class="order-card-name">${o.name}</div>
+          <div class="order-card-date">${o.date} • ${o.connection || ''} • ${o.phone}</div>
+        </div>
+        <button class="copy-kaka-btn" id="copy-btn-${o.id}" onclick="copyForKaka(${o.id}, '${escJs(o.name)}', '${escJs(itemsText)}', ${o.total})">
+          📋 Copy for Big Lady Kaka
+        </button>
+      </div>
+      <div class="order-card-items">${items.map(i => `${i.code} — ${i.name} × ${i.qty} = $${i.lineTotal}`).join('<br>')}</div>
+      <div class="order-card-total">Total: $${o.total}</div>
+    </div>`;
+  }).join('');
+}
+
+function escJs(s) { return (s||'').replace(/'/g,"\'").replace(/\n/g,'\\n'); }
+
+function copyForKaka(id, name, itemsText, total) {
+  const text = `YD ORDER\n━━━━━━━━━━━━━━━━━━━━\nCustomer: ${name}\n\nItems:\n${itemsText.replace(/\\n/g,'\n')}\n\nTotal: $${total}\n━━━━━━━━━━━━━━━━━━━━`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn-' + id);
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 Copy for Big Lady Kaka';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+
+function copyWallet() {
+  navigator.clipboard.writeText('0x85A165217426c4262BCb6812D6936BbE305F937B').then(() => {
+    const btn = document.getElementById('copy-wallet-btn');
+    btn.textContent = '✅ COPIED!';
+    btn.style.background = 'rgba(76,175,80,0.2)';
+    btn.style.borderColor = '#4caf50';
+    btn.style.color = '#4caf50';
+    setTimeout(() => {
+      btn.textContent = '📋 COPY WALLET ADDRESS';
+      btn.style.background = 'var(--surface2)';
+      btn.style.borderColor = 'var(--accent)';
+      btn.style.color = 'var(--accent)';
+    }, 2500);
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+async function checkPortalStatus() {
+  if (!SUPABASE_URL || SUPABASE_URL.includes('YOUR_')) return;
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/yd_settings?select=is_open&limit=1`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const data = await res.json();
+    if (data && data[0] && !data[0].is_open) {
+      document.getElementById('closed-banner').style.display = 'block';
+      document.getElementById('checkout-btn').disabled = true;
+    }
+  } catch(e) {}
+}
+checkPortalStatus();
+renderCart();
+</script>
+</body>
+</html>
