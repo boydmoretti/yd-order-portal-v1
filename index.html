@@ -748,7 +748,7 @@
   <strong>⚠️ CRYPTO ONLY</strong> — Accepted:
   <span class="crypto-tag">USDC</span>
   <span class="crypto-tag">USDT</span>
-  on Ethereum Network &nbsp;|&nbsp;
+  on Ethereum Network (ERC-20) &nbsp;|&nbsp;
   <strong>🚚 Average Ship Time: 4 Weeks</strong> &nbsp;|&nbsp;
   Free reship if seized at customs (1x)
 </div>
@@ -860,11 +860,7 @@
 
       <div class="form-group">
         <label class="form-label">Your Name</label>
-        <select class="form-select" id="order-name">
-          <option value="">— Select Name —</option>
-          <option value="Self">Self</option>
-          <option value="Boyd">Boyd</option>
-        </select>
+        <input type="text" class="form-input" id="order-name" placeholder="Enter your name">
       </div>
       <div class="form-group">
         <label class="form-label">Phone</label>
@@ -878,9 +874,8 @@
         <label class="form-label">Connection / Delivery</label>
         <select class="form-select" id="order-connection">
           <option value="">— Select —</option>
-          <option value="Pickup - Work">Pickup — Work</option>
-          <option value="Pickup - Other">Pickup — Other</option>
-          <option value="Ship - USPS">Ship — USPS to My Address</option>
+          <option value="Connection - Boyd">Connection — Boyd</option>
+          <option value="Pickup at Work">Pickup at Work</option>
         </select>
       </div>
 
@@ -898,11 +893,10 @@
 
       <div class="crypto-box">
         <div class="crypto-box-title">💎 Payment — Crypto Only</div>
-        <p>Send exact amount to wallet below. <strong>Ethereum Network only.</strong> After sending, include your TX hash in the WhatsApp group.</p>
+        <p>Send exact amount to wallet below. <strong>Ethereum Network (ERC-20) only.</strong> After sending, screenshot your transaction and send it to Boyd on WhatsApp. Boyd will confirm receipt before your order is processed.</p>
         <div class="crypto-accepted">
-          <span class="crypto-tag-item">USDC</span>
-          <span class="crypto-tag-item">USDT</span>
-          <span class="crypto-tag-item">ETH Network</span>
+          <span class="crypto-tag-item">USDC (ERC-20)</span>
+          <span class="crypto-tag-item">USDT (ERC-20)</span>
         </div>
         <span class="wallet" id="wallet-address">0x85A165217426c4262BCb6812D6936BbE305F937B</span>
         <button onclick="copyWallet()" id="copy-wallet-btn" style="margin-top:8px;width:100%;background:var(--surface2);border:1px solid var(--accent);color:var(--accent);border-radius:6px;padding:8px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.2s;">📋 COPY WALLET ADDRESS</button>
@@ -916,7 +910,7 @@
       <div class="success-box">
         <div class="success-icon">✅</div>
         <div class="success-title">ORDER RECEIVED</div>
-        <div class="success-msg">Your order has been submitted.<br>Send crypto payment to the wallet address.<br>Then post your TX hash in the WhatsApp group.<br><br><strong>Avg shipping time: 4 weeks.</strong><br>Free reship if seized at customs (1x).</div>
+        <div class="success-msg">Your order has been submitted.<br>Send your crypto payment to the wallet address.<br>Then screenshot your transaction and send it to Boyd on WhatsApp.<br>Boyd will confirm receipt before your order is processed.<br><br><strong>Avg shipping time: 4 weeks.</strong><br>Free reship if seized at customs (1x).</div>
         <button class="submit-btn" style="margin-top:20px;" onclick="closeCheckout()">CLOSE</button>
       </div>
     </div>
