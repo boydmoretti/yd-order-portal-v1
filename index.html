@@ -1379,12 +1379,15 @@ async function submitOrder() {
       },
       body: JSON.stringify({ date: dateStr, name, phone, email, connection, items, subtotal, total: subtotal })
     });
-    if (!res.ok) throw new Error('DB error');
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(errText);
+    }
     document.getElementById('checkout-content').style.display = 'none';
     document.getElementById('success-content').style.display = '';
     clearCart();
   } catch(e) {
-    alert('Error submitting order. Check Supabase credentials.');
+    alert('Error: ' + e.message);
     btn.disabled = false;
     btn.textContent = 'SUBMIT ORDER';
   }
